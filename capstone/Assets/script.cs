@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Eyes : MonoBehaviour {
+public class script : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
