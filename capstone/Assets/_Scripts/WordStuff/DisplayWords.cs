@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WordGenerator : MonoBehaviour {
+public class DisplayWords : MonoBehaviour {
     public GameObject wordPrefab;
-    GameObject currentObjectShowingWords;
-    bool showingWords = false;
+    public GameObject currentObjectShowingWords;
 
 	// Use this for initialization
 	void Start () {
@@ -50,7 +49,7 @@ public class WordGenerator : MonoBehaviour {
     {
         GameObject currentObject = myObj;
         Transform words = currentObject.transform.Find("Words");
-
+ 
         foreach (Transform child in words.transform)
         {
             GameObject wordSpace = Instantiate(wordPrefab, child.transform.position, Quaternion.identity) as GameObject;
@@ -61,6 +60,7 @@ public class WordGenerator : MonoBehaviour {
     void ClearWords( GameObject myObj)
     {
         GameObject currentObject = myObj;
+
         Transform words = currentObject.transform.GetChild(0);
   
         foreach (Transform child in words.transform)
