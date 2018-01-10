@@ -154,48 +154,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d11f37436db85243ad7971c2f92de36, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &424209064
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4725805111873000, guid: 56e106c199b2d6842a07f3a62bce8d50, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 32.995094
-      objectReference: {fileID: 0}
-    - target: {fileID: 4725805111873000, guid: 56e106c199b2d6842a07f3a62bce8d50, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 5.614566
-      objectReference: {fileID: 0}
-    - target: {fileID: 4725805111873000, guid: 56e106c199b2d6842a07f3a62bce8d50, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0.4853549
-      objectReference: {fileID: 0}
-    - target: {fileID: 4725805111873000, guid: 56e106c199b2d6842a07f3a62bce8d50, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4725805111873000, guid: 56e106c199b2d6842a07f3a62bce8d50, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4725805111873000, guid: 56e106c199b2d6842a07f3a62bce8d50, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4725805111873000, guid: 56e106c199b2d6842a07f3a62bce8d50, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4725805111873000, guid: 56e106c199b2d6842a07f3a62bce8d50, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 56e106c199b2d6842a07f3a62bce8d50, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &522700090
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +525,16 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 0}
+      propertyPath: wordPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 9d11f37436db85243ad7971c2f92de36, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &926193069
@@ -761,7 +728,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 9d11f37436db85243ad7971c2f92de36, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &972637191
@@ -960,9 +932,6 @@ GameObject:
   - component: {fileID: 1130553847}
   - component: {fileID: 1130553846}
   - component: {fileID: 1130553850}
-  - component: {fileID: 1130553851}
-  - component: {fileID: 1130553852}
-  - component: {fileID: 1130553853}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1045,118 +1014,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   rotationTransform: 0
---- !u!114 &1130553851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1130553845}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ec5cf00ca181d45a42ba1870e148c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsWalking: 0
-  m_WalkSpeed: 0
-  m_RunSpeed: 0
-  m_RunstepLenghten: 0
-  m_JumpSpeed: 0
-  m_StickToGroundForce: 0
-  m_GravityMultiplier: 0
-  m_MouseLook:
-    XSensitivity: 2
-    YSensitivity: 2
-    clampVerticalRotation: 1
-    MinimumX: -90
-    MaximumX: 90
-    smooth: 0
-    smoothTime: 5
-    lockCursor: 1
-  m_UseFovKick: 0
-  m_FovKick:
-    Camera: {fileID: 0}
-    originalFov: 0
-    FOVIncrease: 3
-    TimeToIncrease: 1
-    TimeToDecrease: 1
-    IncreaseCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_UseHeadBob: 0
-  m_HeadBob:
-    HorizontalBobRange: 0.33
-    VerticalBobRange: 0.33
-    Bobcurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1.5
-        value: -1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 2
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    VerticaltoHorizontalRatio: 1
-  m_JumpBob:
-    BobDuration: 0
-    BobAmount: 0
-  m_StepInterval: 0
-  m_FootstepSounds: []
-  m_JumpSound: {fileID: 0}
-  m_LandSound: {fileID: 0}
---- !u!114 &1130553852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1130553845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc0e8bec530222549a12fd9ec6493fac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wordPrefab: {fileID: 0}
---- !u!114 &1130553853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1130553845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad1d952cc03b4b44fbbbc5404f289f42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wordPrefab: {fileID: 0}
 --- !u!1 &1148609966
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,7 +1250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0e8bec530222549a12fd9ec6493fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wordPrefab: {fileID: 1879819453028268, guid: b0e38607128fb254cb60588d459ba0c4, type: 2}
+  wordPrefab: {fileID: 1320543167165756, guid: 56e106c199b2d6842a07f3a62bce8d50, type: 2}
 --- !u!4 &1631874435
 Transform:
   m_ObjectHideFlags: 0

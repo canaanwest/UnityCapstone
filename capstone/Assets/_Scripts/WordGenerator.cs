@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class WordGenerator : MonoBehaviour {
     public GameObject wordPrefab;
+    GameObject currentObjectShowingWords;
+    bool showingWords = false;
+
 	// Use this for initialization
 	void Start () {
         
@@ -11,43 +14,58 @@ public class WordGenerator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit, 100f))
-                {
-                    if (hit.transform)
-                    {
-                        print("This is hit: " + hit);
-                        LoadWords(hit.transform.gameObject);
-                    }
-                }
-            }
+            emitEventkForObjectToDisplayWords();
         }
-            // if (Object is being focused on) {
-            //execute a piece of code that fills that object's children with words
-       //}
 	}
+
+    void emitEventkForObjectToDisplayWords()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, 100f) && hit.transform && hit.transform.Find("Words"))
+        {
+            if ((currentObjectShowingWords == hit.transform.gameObject))
+            {
+                ClearWords(currentObjectShowingWords);
+                currentObjectShowingWords = null;
+            }
+            else if ((currentObjectShowingWords != null))
+            {
+                ClearWords(currentObjectShowingWords);
+                currentObjectShowingWords = hit.transform.gameObject;
+                LoadWords(currentObjectShowingWords);
+            }
+            else
+            {
+                currentObjectShowingWords = hit.transform.gameObject;
+                LoadWords(hit.transform.gameObject);
+            }
+         
+        }
+    }
 
     public void LoadWords (GameObject myObj)
     {
-
         GameObject currentObject = myObj;
-        //GameObject[] words = currentObject.Find(GameObject.FindObjectOfType<Words>());
-        Transform words = currentObject.transform.GetChild(0);
-
-        print(words);
-       
+        Transform words = currentObject.transform.Find("Words");
 
         foreach (Transform child in words.transform)
         {
-            print("this is" + this);
             GameObject wordSpace = Instantiate(wordPrefab, child.transform.position, Quaternion.identity) as GameObject;
             wordSpace.transform.parent = child;
+        }
+    }
 
+    void ClearWords( GameObject myObj)
+    {
+        GameObject currentObject = myObj;
+        Transform words = currentObject.transform.GetChild(0);
+  
+        foreach (Transform child in words.transform)
+        {
+            Destroy(child.transform.GetChild(0).gameObject);
         }
     }
 }
