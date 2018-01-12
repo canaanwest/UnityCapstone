@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 102493092608629070}
   - component: {fileID: 114520859628600942}
   - component: {fileID: 114188451214624352}
+  - component: {fileID: 65540507068274962}
+  - component: {fileID: 114351904500830130}
   m_Layer: 0
   m_Name: TextTemplate
   m_TagString: Untagged
@@ -36,13 +38,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1320543167165756}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0.12902011, z: -0, w: 0.991642}
+  m_LocalPosition: {x: 4.4930763, y: 1.98, z: 12.829281}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -14.826001, z: 0}
 --- !u!23 &23392776969624906
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -77,6 +79,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &65540507068274962
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1320543167165756}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.6297216, y: 2.1789062, z: 0.66947246}
+  m_Center: {x: 0.15063141, y: 0, z: 0.07646373}
 --- !u!102 &102493092608629070
 TextMesh:
   serializedVersion: 3
@@ -84,13 +98,13 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1320543167165756}
-  m_Text: 
+  m_Text: hell
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 0
-  m_TabSize: 30
+  m_TabSize: 15
   m_FontSize: 0
   m_FontStyle: 1
   m_RichText: 1
@@ -110,6 +124,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentFocusedObj: {fileID: 0}
+--- !u!114 &114351904500830130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1320543167165756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b061a7806adc2744ea18c15b33e8fef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114520859628600942
 MonoBehaviour:
   m_ObjectHideFlags: 1

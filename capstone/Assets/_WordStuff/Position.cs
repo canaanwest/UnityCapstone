@@ -7,6 +7,11 @@ public class Position : MonoBehaviour {
     // Use this for initialization
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(transform.position, new Vector3 (1, 1, 1));
+        //Gizmos.DrawWireCube(transform.position, new Vector3 (1, 1, 1));
+        Gizmos.DrawWireSphere(transform.position, 1);
+    }
+    private void Update()
+    {
+        print(transform);
     }
 }

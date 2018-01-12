@@ -5,11 +5,6 @@ using UnityEngine;
 public class DisplayWords : MonoBehaviour {
     public GameObject wordPrefab;
     public GameObject currentObjectShowingWords;
-
-	// Use this for initialization
-	void Start () {
-        
-    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -61,11 +56,19 @@ public class DisplayWords : MonoBehaviour {
     {
         GameObject currentObject = myObj;
 
-        Transform words = currentObject.transform.GetChild(0);
+        Transform words = currentObject.transform.Find("Words");
   
         foreach (Transform child in words.transform)
         {
-            Destroy(child.transform.GetChild(0).gameObject);
+            if (child.transform.GetChild(0).gameObject.name == "TextTemplate(Clone)")
+            {
+                Destroy(child.transform.GetChild(0).gameObject);
+            } else
+            {
+                print("Nope");
+            }
+
+
         }
     }
 }
