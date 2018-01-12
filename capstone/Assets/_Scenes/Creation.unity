@@ -420,6 +420,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd94b6c95ab61e4caa18b34c47f7747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creationButton: {fileID: 0}
+  galleryButton: {fileID: 0}
+  quitButton: {fileID: 0}
+  collectionScene: {fileID: 0}
 --- !u!4 &1560443116
 Transform:
   m_ObjectHideFlags: 0
@@ -515,7 +519,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1903315724}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 465.5, y: 196.5, z: 0}
+  m_LocalPosition: {x: 434.5, y: 198, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 460074595}
@@ -612,7 +616,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: ParkScene2
+          m_StringArgument: Collection
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
