@@ -14,20 +14,32 @@ public class LevelManager : MonoBehaviour
     public void Update()
     {
         GameObject focusedObject = TobiiAPI.GetFocusedObject();
+
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Input.GetMouseButtonDown(0))
+        {
+            print("MOUSE CLICK!");
+            if (Physics.Raycast(ray, out hit, 100f) && hit.transform && hit.transform.gameObject.name == "sack_010")
+            {
+                //&& hit.transform.gameObject.name == "sack_010"
+                print(hit.transform);
+                print("YOU HIT A THE POUCH");
+                LoadLevel("Creation");
+            }
+        }
+        
         // EyeSelectLevel(focusedObject);   
-       // GetTimeElapsed(focusedObject);
+        // GetTimeElapsed(focusedObject);
     }
 
     public void LoadLevel(string name)
     {
-        print ("New Level load: " + name);
         Application.LoadLevel(name);
-
     }
 
     public void QuitRequest()
     {
-        print ("Quit requested");
         Application.Quit();
     }
 
@@ -76,5 +88,6 @@ public class LevelManager : MonoBehaviour
 
         }
     }
+
 
 }
