@@ -11,11 +11,15 @@ public class GenerateWord : MonoBehaviour {
         "bark", "green", "brown", "wind",  "branch", "branches", "roots", "rooted", "caterpiller",
         "ladybug", "ants", "seeds", "flowers", "birds", "nests", "bird", "nest", "eggs", "sticks",
         "monkeys", "monkey", "flower", "flowers", "fort", "base", "shade", "fruit", "oranges", "apples",
-        "windchime", "swing", "home" };
+        "windchime", "swing", "home", "shake", "fall", "sway", "grow", "blossom", "limb", "reach",
+        "hang", "sweep", "chop", "shaded", "quiver", "sleep", "nap", "picnic", "swing", "climb", "climb",
+        "crawl", "slept", "napped"  };
 
     string[] benchWords = new string[] { "bench", "sit", "read", "talk", "chat", "watch", "wooden",
-        "think" };
-    string[] lampPostWords = new string[] { "light", "tall", "metal", "old", "dark", "darkness", "creepy", "scary", "fire" };
+        "think", "benched", "hold", "drink", "water", "seat", "rest", "park", "wood", "ice cream", "eat",
+        "picnic", "shade", "write", "view", "reading", "people"};
+    string[] lampPostWords = new string[] { "light", "tall", "metal", "old", "dark", "darkness", "creepy",
+        "scary", "fire", "lit", "cast", "shadow", "nighttime", "night", "warmth" };
 
 
 

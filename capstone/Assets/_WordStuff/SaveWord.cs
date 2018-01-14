@@ -6,16 +6,11 @@ public class SaveWord : MonoBehaviour {
 
     static string collectedWords = "";
     TextMesh getWord;
-    //where should I put them?
 
-    //maybe I can use a global variable, which would have to be something that oculd be 
-    //dynamically changed, like a hash table maybe?
-    //
-    //on click
-    //if clicked object has tag/name TextTemplate
-    // string collectedWords += object.getelement<text>
-    // 
-    
+    private void Update()
+    {
+
+    }
     void emitEventForCollectObjectWords()
         //right now, this automatically gets all of the objects.
     {
@@ -37,5 +32,11 @@ public class SaveWord : MonoBehaviour {
     {
         emitEventForCollectObjectWords();
     }
+
+    public string ReturnCollected()
+    {
+        return collectedWords;
+    }
+
 
 }
