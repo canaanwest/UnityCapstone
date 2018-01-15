@@ -939,7 +939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0e8bec530222549a12fd9ec6493fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wordPrefab: {fileID: 1332034009338056, guid: d38060a2fa038bb4b9689e9e7cb766f9, type: 2}
+  wordPrefab: {fileID: 1691171636548814, guid: f21a57077b17f6a43abcffe400a23859, type: 2}
   currentObjectShowingWords: {fileID: 1817007248}
 --- !u!4 &952230548
 Transform:
@@ -965,7 +965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5bd381de5a8f246b0e2a8de90dad97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wordPrefab: {fileID: 1332034009338056, guid: d38060a2fa038bb4b9689e9e7cb766f9, type: 2}
+  wordPrefab: {fileID: 1691171636548814, guid: f21a57077b17f6a43abcffe400a23859, type: 2}
   loadWordsHere: {fileID: 1817007248}
   pouchWords: []
 --- !u!1001 &985739452

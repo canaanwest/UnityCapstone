@@ -1232,7 +1232,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1631874435}
   - component: {fileID: 1631874434}
-  - component: {fileID: 1631874436}
   m_Layer: 0
   m_Name: WordCatcher
   m_TagString: Untagged
@@ -1266,18 +1265,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1631874436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1631874433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cda81948977b2444a1df0afad576b51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentFocusedObj: {fileID: 0}
 --- !u!4 &1656773045 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4404649018075958, guid: 653e1204d89d9b34b8b38785d5dbb359,

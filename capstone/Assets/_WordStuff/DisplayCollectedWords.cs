@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DisplayCollectedWords : MonoBehaviour
 {
     public GameObject wordPrefab;
+    public Text text;
     public GameObject loadWordsHere;
     public string[] pouchWords;
 
@@ -63,10 +65,16 @@ public class DisplayCollectedWords : MonoBehaviour
         int i = 0;
         foreach (Transform child in gettingLoadObject.transform)
         {
-            if (words.Length >= i)
+            if (i < words.Length)
             {
+                Text toFill = wordPrefab.GetComponent<Text>();
+                print("word prefab's text is " + toFill.text);
+                toFill.text = words[i];
                 GameObject wordSpace = Instantiate(wordPrefab, child.transform.position, Quaternion.identity) as GameObject;
                 wordSpace.transform.parent = child;
+
+                print("Word prefab is " + wordPrefab);
+               
             }
             i++;
         }
