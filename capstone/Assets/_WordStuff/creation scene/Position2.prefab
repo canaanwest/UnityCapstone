@@ -77,5 +77,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wordPrefab: {fileID: 1332034009338056, guid: d38060a2fa038bb4b9689e9e7cb766f9, type: 2}
+  text: {fileID: 0}
   loadWordsHere: {fileID: 0}
   pouchWords: []
