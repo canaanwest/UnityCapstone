@@ -28,17 +28,12 @@ public class GenerateWord : MonoBehaviour {
         GameObject theScript = GameObject.Find("WordCatcher");
         DisplayWords displayWords = theScript.GetComponent<DisplayWords>();
         currentFocusedObj = displayWords.currentObjectShowingWords;
-
-
         decideWhichWord(currentFocusedObj);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     void decideWhichWord(GameObject theFocusedObject)
+        //this is deciding which words to send to the text mesh. this is the problem with recycling the texttemplate;
+
     {
         string[] currentWordCollection;
         toFill = GetComponent<TextMesh>();

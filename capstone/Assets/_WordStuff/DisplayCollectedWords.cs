@@ -5,80 +5,70 @@ using UnityEngine;
 public class DisplayCollectedWords : MonoBehaviour
 {
     public GameObject wordPrefab;
-    public string[] pouchWords; 
-    private void Start()
-    {
-       GameObject getCollectedScript = GameObject.Find("PouchWords");
-       SaveWord savedWords = getCollectedScript.GetComponent<SaveWord>();
-        print("Saved Words: " + savedWords.ReturnCollected());
-       pouchWords = savedWords.ReturnCollected().Split(new char[] {});
-
-        foreach (string word in pouchWords)
-        {
-            print("pouchwords: " + word);
-            //attach word to position;
-        }
-        
-       // DisplayWords displayCollectedWords = getCollectedScript.GetComponent<collectedWords>();
-    }
+    public GameObject loadWordsHere;
+    public string[] pouchWords;
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, 10);
     }
 
-    
-    public GameObject currentObjectShowingWords;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        if (Input.GetMouseButtonUp(0))
+        //this is to identify the script and grab the variable containing collected words.
+        // It then does the work of splitting the words. 
+
+        //Next I need to call a function that will do the work of making a 1:1 map to split the words;
+
+
+        GameObject getCollectedScript = GameObject.Find("PouchWords");
+        SaveWord savedWords = getCollectedScript.GetComponent<SaveWord>();
+        print("Saved Words: " + savedWords.ReturnCollected());
+        pouchWords = savedWords.ReturnCollected().Split(new char[] {});
+
+        foreach (string word in pouchWords)
         {
-            emitEventkForObjectToDisplayWords();
+            print("pouchwords: " + word);
+            //attach word to position;
         }
+
+        LoadWords(pouchWords);
     }
 
-    void emitEventkForObjectToDisplayWords()
-    {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 100f) && hit.transform && hit.transform.Find("Collected"))
-        {
 
+
+
+
+    //I'm working here. I want to map a 1:1 ratio of word to position2. 
+    public void LoadWords(string[] words)
+    {
+        //iterate through the words, adding them one-by-one to the positions in
+        //the gameObject called "CanvasTL"
+        Transform gettingLoadObject = loadWordsHere.transform.Find("Words");
+
+        int count = 0;
+        foreach (Transform child in gettingLoadObject.transform)
+        {
+            count += 1;
         }
-    }
 
-    public void LoadWords(GameObject myObj)
-    {
-        GameObject currentObject = myObj;
-        Transform words = currentObject.transform.Find("Words");
+        int numberOfIterations = words.Length > count ? words.Length : count;
 
-        foreach (Transform child in words.transform)
+//        for (int i = 0; i < numberOfIterations; i++)
+//        {
+
+//        }
+
+        int i = 0;
+        foreach (Transform child in gettingLoadObject.transform)
         {
-            GameObject wordSpace = Instantiate(wordPrefab, child.transform.position, Quaternion.identity) as GameObject;
-            wordSpace.transform.parent = child;
-        }
-    }
-
-    void ClearWords(GameObject myObj)
-    {
-        GameObject currentObject = myObj;
-
-        Transform words = currentObject.transform.Find("Words");
-
-        foreach (Transform child in words.transform)
-        {
-            if (child.transform.GetChild(0).gameObject.name == "TextTemplate(Clone)")
+            if (words.Length >= i)
             {
-                Destroy(child.transform.GetChild(0).gameObject);
+                GameObject wordSpace = Instantiate(wordPrefab, child.transform.position, Quaternion.identity) as GameObject;
+                wordSpace.transform.parent = child;
             }
-            else
-            {
-                print("Nope");
-            }
-
-
+            i++;
         }
     }
 }

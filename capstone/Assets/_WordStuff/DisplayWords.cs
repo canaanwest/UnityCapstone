@@ -8,13 +8,17 @@ public class DisplayWords : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //this function says if there's a mouseclick, emit an event
+        //so that an object knows to display words;
         if (Input.GetMouseButtonUp(0))
         {
-            emitEventkForObjectToDisplayWords();
+            emitEventForObjectToDisplayWords();
         }
 	}
 
-    void emitEventkForObjectToDisplayWords()
+    void emitEventForObjectToDisplayWords()
+        //this function directs the game to display or clear words based 
+        //on the associated game object;
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -41,11 +45,14 @@ public class DisplayWords : MonoBehaviour {
     }
 
     public void LoadWords (GameObject myObj)
+        //this function locates the object upon which to load words within
+        //the game and then loads the words to the game.
+        //where is it getting the words? freaky.
     {
         GameObject currentObject = myObj;
-        Transform words = currentObject.transform.Find("Words");
+        Transform wordsObject = currentObject.transform.Find("Words");
  
-        foreach (Transform child in words.transform)
+        foreach (Transform child in wordsObject.transform)
         {
             GameObject wordSpace = Instantiate(wordPrefab, child.transform.position, Quaternion.identity) as GameObject;
             wordSpace.transform.parent = child;
@@ -53,9 +60,10 @@ public class DisplayWords : MonoBehaviour {
     }
 
     void ClearWords( GameObject myObj)
+        //this function clears the word from a position;
+
     {
         GameObject currentObject = myObj;
-
         Transform words = currentObject.transform.Find("Words");
   
         foreach (Transform child in words.transform)
