@@ -385,7 +385,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 628140201}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 163, y: 122.5, z: 0}
+  m_LocalPosition: {x: 378.5, y: 208.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1987831885}
@@ -634,6 +634,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd94b6c95ab61e4caa18b34c47f7747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creationButton: {fileID: 0}
+  galleryButton: {fileID: 0}
+  quitButton: {fileID: 0}
+  collectionScene: {fileID: 0}
 --- !u!4 &1187668959
 Transform:
   m_ObjectHideFlags: 0
@@ -841,7 +845,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hi! Get Ready to Write!
+  m_Text: Poesie
 --- !u!222 &1987831887
 CanvasRenderer:
   m_ObjectHideFlags: 0
