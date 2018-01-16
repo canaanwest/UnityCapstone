@@ -62,7 +62,6 @@ public class DisplayPronouns : MonoBehaviour {
             print("Word prefab is " + wordPrefab);
             i++;
         }
-        
     
     }
 }

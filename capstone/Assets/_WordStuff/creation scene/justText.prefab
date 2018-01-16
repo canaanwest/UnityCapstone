@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 224528055698906732}
   - component: {fileID: 222325133033234034}
   - component: {fileID: 114321496574213064}
-  - component: {fileID: 114978881162662762}
   - component: {fileID: 61884535113095894}
   m_Layer: 5
   m_Name: justText
@@ -88,18 +87,6 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
---- !u!114 &114978881162662762
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1691171636548814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a84798408d1aaa848b03db7063a3a61f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collider: {fileID: 0}
 --- !u!222 &222325133033234034
 CanvasRenderer:
   m_ObjectHideFlags: 1

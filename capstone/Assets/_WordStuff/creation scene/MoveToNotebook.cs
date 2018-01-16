@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MoveToNotebook : MonoBehaviour {
-    public BoxCollider2D collider;
+   // public GameObject loadWordsHere;
+    public GameObject wordsPrefab;
 
 	// Use this for initialization
 	void Start () {
-		
+        print(wordsPrefab);
 	}
 	
 	// Update is called once per frame
@@ -22,15 +23,30 @@ public class MoveToNotebook : MonoBehaviour {
     void SelectWordForMovement()
     {
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        print("worldpoint is : " + worldPoint);
         RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, new Vector2(0, 0));
 
-        
-        print("hit is " + hit);
         if (hit.collider)
         {
-            print("You hit a word!");
-            print(hit.collider.transform.GetComponent<Text>().text);
+            string newWord = hit.collider.transform.GetComponent<Text>().text;
+            LoadWord(newWord);
+        }
+    }
+
+    void LoadWord(string word)
+    {
+        Transform gettingLoadObject = this.transform.Find("Poem");
+        Text toFill = wordsPrefab.GetComponent<Text>();
+        print("gettingLoadObject is " + gettingLoadObject);
+
+        foreach (Transform child in gettingLoadObject.transform)
+        {
+            print("something something");
+            if (child.transform.gameObject)
+            {
+                toFill.text = word;
+                GameObject wordSpace = Instantiate(wordsPrefab, child.transform.position, Quaternion.identity) as GameObject;
+                wordSpace.transform.parent = child;
+            }
         }
     }
 

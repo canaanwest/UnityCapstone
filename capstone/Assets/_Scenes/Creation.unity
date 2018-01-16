@@ -1493,6 +1493,7 @@ GameObject:
   - component: {fileID: 952230547}
   - component: {fileID: 952230549}
   - component: {fileID: 952230551}
+  - component: {fileID: 952230552}
   - component: {fileID: 952230550}
   m_Layer: 0
   m_Name: DisplayPouch
@@ -1548,7 +1549,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 952230546}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04678a8d06a1e8b4ebfd2d713f7c105a, type: 3}
   m_Name: 
@@ -1566,6 +1567,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadWordsHere: {fileID: 1296274143}
   wordPrefab: {fileID: 1691171636548814, guid: f21a57077b17f6a43abcffe400a23859, type: 2}
+--- !u!114 &952230552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 952230546}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a84798408d1aaa848b03db7063a3a61f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wordsPrefab: {fileID: 1691171636548814, guid: f21a57077b17f6a43abcffe400a23859,
+    type: 2}
 --- !u!1 &1057386897
 GameObject:
   m_ObjectHideFlags: 0
@@ -2325,26 +2339,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114529029653144098, guid: 00461c9cf271dd34f963278c82cfa605,
         type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114529029653144098, guid: 00461c9cf271dd34f963278c82cfa605,
-        type: 2}
       propertyPath: loadWordsHere
       value: 
       objectReference: {fileID: 1817007248}
-    - target: {fileID: 4570706922995344, guid: 00461c9cf271dd34f963278c82cfa605, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.60495996
-      objectReference: {fileID: 0}
-    - target: {fileID: 4570706922995344, guid: 00461c9cf271dd34f963278c82cfa605, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.60495996
-      objectReference: {fileID: 0}
-    - target: {fileID: 4570706922995344, guid: 00461c9cf271dd34f963278c82cfa605, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.5974
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00461c9cf271dd34f963278c82cfa605, type: 2}
   m_IsPrefabParent: 0
@@ -3277,7 +3274,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1903315724}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 378.5, y: 208.5, z: 0}
+  m_LocalPosition: {x: 343.5, y: 208.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 460074595}
@@ -3573,6 +3570,7 @@ GameObject:
   - component: {fileID: 2030004746}
   - component: {fileID: 2030004745}
   - component: {fileID: 2030004744}
+  - component: {fileID: 2030004747}
   m_Layer: 5
   m_Name: CanvasR
   m_TagString: Untagged
@@ -3656,6 +3654,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &2030004747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2030004742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a84798408d1aaa848b03db7063a3a61f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wordsPrefab: {fileID: 1691171636548814, guid: f21a57077b17f6a43abcffe400a23859,
+    type: 2}
 --- !u!1 &2079564139
 GameObject:
   m_ObjectHideFlags: 0

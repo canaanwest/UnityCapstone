@@ -68,9 +68,9 @@ public class DisplayWords : MonoBehaviour {
   
         foreach (Transform child in words.transform)
         {
-            if (child.transform.GetChild(0).gameObject.name == "TextTemplate(Clone)")
+            if (child.transform.Find("TextTemplate(Clone)").gameObject)
             {
-                Destroy(child.transform.GetChild(0).gameObject);
+                Destroy(child.transform.Find("TextTemplate(Clone)").gameObject);
             } else
             {
                 print("Nope");
