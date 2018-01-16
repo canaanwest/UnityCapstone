@@ -30,7 +30,7 @@ public class MoveToNotebook : MonoBehaviour {
         if (hit.collider)
         {
             print("You hit a word!");
-            print(hit.collider.transform.GetComponent<Text>());
+            print(hit.collider.transform.GetComponent<Text>().text);
         }
     }
 
