@@ -11,23 +11,32 @@ public class DisplayPronouns : MonoBehaviour {
         { "they", "they're", "they", "their", "theirs"},
         { "it", "it's", "it", "its", "its"},
         { "he", "he's", "his", "him", "him" },
-        { "she", "she's", "hers", "her", "her"}};
-
-    string[] articles = { "a", "an", "the", "this", "these", "those" };
+        { "she", "she's", "hers", "her", "her"},
+        { "a", "an", "the", "this", "these" }};
 
 
     string[,] verbs = {{ "was", "go", "want", "think", "feel", "look", "wonder" },
                         { "were", "go", "want", "think", "feel", "look", "wonder"},
-                        { "was", "goes", "wants", "thinks", "feels", "looks", "wonders"}};
+                        { "was", "goes", "wants", "thinks", "feels", "looks", "wonders"},
+                        { "were", "goes", "want", "think", "feels", "look", "wonders"} };
 
 
 	// Use this for initialization
 	void Start () {
-        int randomOne = Random.Range(0, pronouns.Length);
-        int randomTwo = Random.Range(0, verbs.Length);
+        int randomOne = Random.Range(0, 7);
+        int randomTwo;
+        print(randomOne + " is first random number");
+        // need a switch statement to decide what "random2" should be
+        if (randomOne == 1) { randomTwo = 0; }
+        else if (randomOne <= 2) { randomTwo = 1;  }
+        else if (randomOne == 6) { randomTwo = 3;  }
+        else { randomTwo = 2; }
+
+        print(randomTwo + " is the corresponding index for the verbs");
+
 
         string[] pronoun = { pronouns[randomOne, 0], pronouns[randomOne, 1], pronouns[randomOne, 2],
-                            pronouns[randomOne, 3], pronouns[randomOne, 4] } ;
+                            pronouns[randomOne, 3], pronouns[randomOne, 4] };
         string[] verb = { verbs[randomTwo, 0], verbs[randomTwo, 1],
             verbs[randomTwo, 2], verbs[randomTwo, 3], verbs[randomTwo, 4] };
 
@@ -51,7 +60,7 @@ public class DisplayPronouns : MonoBehaviour {
             wordSpace.transform.parent = child;
 
             print("Word prefab is " + wordPrefab);
-
+            i++;
         }
         
     
