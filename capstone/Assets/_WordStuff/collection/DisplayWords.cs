@@ -75,8 +75,6 @@ public class DisplayWords : MonoBehaviour {
             {
                 print("Nope");
             }
-
-
         }
     }
 }

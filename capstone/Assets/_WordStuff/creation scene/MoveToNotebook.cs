@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MoveToNotebook : MonoBehaviour {
    // public GameObject loadWordsHere;
     public GameObject wordsPrefab;
-
+    int i = 0;
 	// Use this for initialization
 	void Start () {
         print(wordsPrefab);
@@ -28,26 +28,32 @@ public class MoveToNotebook : MonoBehaviour {
         if (hit.collider)
         {
             string newWord = hit.collider.transform.GetComponent<Text>().text;
-            LoadWord(newWord);
+            int instanceID= hit.collider.GetInstanceID();
+            //print(instanceID);
+
+            LoadWord(newWord, i);
+            i++;
         }
     }
 
-    void LoadWord(string word)
+    void LoadWord(string word, int i)
     {
         Transform gettingLoadObject = this.transform.Find("Poem");
         Text toFill = wordsPrefab.GetComponent<Text>();
         print("gettingLoadObject is " + gettingLoadObject);
 
-        foreach (Transform child in gettingLoadObject.transform)
-        {
-            print("something something");
-            if (child.transform.gameObject)
-            {
+        Transform position = gettingLoadObject.transform.GetChild(i);
+
+        //foreach (Transform child in gettingLoadObject.transform)
+        //{
+           // print("the game object in child.transform is " + child.transform.Find("justText(Clone)"));
+            //if (child.transform.gameObject)
+            //{
                 toFill.text = word;
-                GameObject wordSpace = Instantiate(wordsPrefab, child.transform.position, Quaternion.identity) as GameObject;
-                wordSpace.transform.parent = child;
-            }
-        }
+                GameObject wordSpace = Instantiate(wordsPrefab, position.position, Quaternion.identity) as GameObject;
+                wordSpace.transform.parent = position;
+         //   }
+        //}
     }
 
 
