@@ -7,9 +7,9 @@ public class MoveToNotebook : MonoBehaviour {
    // public GameObject loadWordsHere;
     public GameObject wordsPrefab;
     int i = 0;
-	// Use this for initialization
-	void Start () {
-        print(wordsPrefab);
+    // Use this for initialization
+
+    void Start () {
 	}
 	
 	// Update is called once per frame

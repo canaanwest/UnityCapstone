@@ -28,14 +28,12 @@ public class DisplayWords : MonoBehaviour {
 	}
 
     void emitEventForObjectToDisplayWords()
-        //this function directs the game to display or clear words based 
-        //on the associated game object;
     {
 
         MouseClickDisplayWords();
     }
 
-    void EyeClickDisplayWords(GameObject getWordsForThisObject)
+    public void EyeClickDisplayWords(GameObject getWordsForThisObject)
     {
         if ((currentObjectShowingWords == getWordsForThisObject))
         {
@@ -53,17 +51,6 @@ public class DisplayWords : MonoBehaviour {
             currentObjectShowingWords = getWordsForThisObject;
             LoadWords(getWordsForThisObject);
         }
-
-        //GameObject getEyeBehaviorScriptObj = GameObject.Find("EyeBehaviorScript");
-        //EyeBehvaior eyeBehaviorScript = getEyeBehaviorScriptObj.GetComponent<EyeBehvaior>();
-
-        //GameObject focusedObject;
-        //focusedObject = eyeBehaviorScript.DisplayWordsForFocusedObject();
-
-
-
-        //This function is going to call upon another class method to decide if an eye click has been made;
-
     }
 
     void MouseClickDisplayWords()
@@ -98,12 +85,15 @@ public class DisplayWords : MonoBehaviour {
         //where is it getting the words? freaky.
     {
         GameObject currentObject = myObj;
-        Transform wordsObject = currentObject.transform.Find("Words");
- 
-        foreach (Transform child in wordsObject.transform)
+        if (currentObject.transform.Find("Words"))
         {
-            GameObject wordSpace = Instantiate(wordPrefab, child.transform.position, Quaternion.identity) as GameObject;
-            wordSpace.transform.parent = child;
+            Transform wordsObject = currentObject.transform.Find("Words");
+ 
+           foreach (Transform child in wordsObject.transform)
+            {
+                GameObject wordSpace = Instantiate(wordPrefab, child.transform.position, Quaternion.identity) as GameObject;
+                wordSpace.transform.parent = child;
+            }
         }
     }
 
@@ -111,24 +101,28 @@ public class DisplayWords : MonoBehaviour {
         //this function clears the word from a position;
 
     {
-        GameObject currentObject = myObj;
-        Transform words = currentObject.transform.Find("Words");
-  
-        foreach (Transform child in words.transform)
+        if (myObj.transform.Find("Words"))
         {
-            if (child.transform.Find("TextTemplate(Clone)").gameObject)
+            GameObject currentObject = myObj;
+            Transform words = currentObject.transform.Find("Words");
+
+            foreach (Transform child in words.transform)
             {
-                Destroy(child.transform.Find("TextTemplate(Clone)").gameObject);
-            } else
-            {
-                print("Nope");
+                if (child.transform.Find("TextTemplate(Clone)").gameObject)
+                {
+                    Destroy(child.transform.Find("TextTemplate(Clone)").gameObject);
+                }
+                else
+                {
+                    print("Nope");
+                }
             }
         }
     }
 
     public IEnumerator DisplayWordsForFocusedObject()
     {
-        while (focusedObj == null)
+        while (focusedObj == null || focusedObj.name == "sack_010")
         {
             yield return null;
             print("You haven't looked at a word associated object yet");
@@ -137,18 +131,19 @@ public class DisplayWords : MonoBehaviour {
         print("YOU FOCUSED ON AN OBJECT GOOD BOY");
         GameObject triggeredFocusedObject = focusedObj;
 
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(2);
         if (triggeredFocusedObject == focusedObj)
         {
-            print("TRYING TO CLICK");
-            EyeClickDisplayWords(focusedObj);
+            print("TRYING TO CLICK ON " + focusedObj);
+
+            EyeClickDisplayWords(triggeredFocusedObject);
             StartCoroutine("DisplayWordsForFocusedObject");
         }
         else
         {
-
             StartCoroutine("DisplayWordsForFocusedObject");
-            //DisplayWordsForFocusedObject();
         }
+
     }
+
 }
