@@ -7,7 +7,9 @@ public class EyeBehvaior : MonoBehaviour
 {
     GameObject focusedObj;
     GameObject getLevelManagerScript;
- 
+    
+    enum focusedObjectName {Tree, Bench, lampPost};
+
     // Use this for initialization
     void Start()
     {
@@ -21,10 +23,13 @@ public class EyeBehvaior : MonoBehaviour
         focusedObj = TobiiAPI.GetFocusedObject();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void ReturnFocusedObject(GameObject currentFocused)
     {
-        print("I got a collision");
+        GameObject displayWordsScript = GameObject.Find("WordCatcher");
+        displayWordsScript.SendMessage(currentFocused.name); 
+
     }
+
 
     IEnumerator WaitAndLoad()
     {
@@ -35,7 +40,7 @@ public class EyeBehvaior : MonoBehaviour
         }
 
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSecondsRealtime(3);
 
         if (focusedObj != null && focusedObj.name == "sack_010")
         {
