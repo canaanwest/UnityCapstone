@@ -2,36 +2,45 @@
 using System.Collections;
 using System.Diagnostics;
 using System.Threading;
-using Tobii.Gaming; 
+using Tobii.Gaming;
 
 public class LevelManager : MonoBehaviour
 {
+    GameObject focusedObject;
     public GameObject creationButton;
     public GameObject galleryButton;
     public GameObject quitButton;
     public GameObject collectionScene;
 
+    public void Start()
+    {
+        //print("BEFORE THE YEILD");
+        //StartCoroutine("WaitAndLoad");
+    }
+
     public void Update()
     {
-        GameObject focusedObject = TobiiAPI.GetFocusedObject();
+
+        focusedObject = TobiiAPI.GetFocusedObject();
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))
         {
-            print("MOUSE CLICK!");
             if (Physics.Raycast(ray, out hit, 100f) && hit.transform && hit.transform.gameObject.name == "sack_010")
             {
                 //&& hit.transform.gameObject.name == "sack_010"
                 print(hit.transform);
-                print("YOU HIT A THE POUCH");
-                LoadLevel("Creation");
             }
         }
-        
+
+        //focusedObject = null;
         // EyeSelectLevel(focusedObject);   
         // GetTimeElapsed(focusedObject);
     }
+
+
+
 
     public void LoadLevel(string name)
     {
@@ -70,24 +79,22 @@ public class LevelManager : MonoBehaviour
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-           // while (currentFocusedObj == focusedObject)
+            // while (currentFocusedObj == focusedObject)
             //{
-                long elapsedTime = stopwatch.ElapsedTicks;
-                for (int i = 0; i < 1000; i++) 
-                {
-                    print("i is" + i);
-                    print ("Elapsed time is " + elapsedTime);
-                }
-                currentFocusedObj = TobiiAPI.GetFocusedObject();
-                //LoadLevel("Gallery");
+            long elapsedTime = stopwatch.ElapsedTicks;
+            for (int i = 0; i < 1000; i++)
+            {
+                print("i is" + i);
+                print("Elapsed time is " + elapsedTime);
+            }
+            currentFocusedObj = TobiiAPI.GetFocusedObject();
+            //LoadLevel("Gallery");
             //}
-            stopwatch.Stop(); 
+            stopwatch.Stop();
 
 
             print("The user is focused on the " + focusedObject);
 
         }
     }
-
-
 }

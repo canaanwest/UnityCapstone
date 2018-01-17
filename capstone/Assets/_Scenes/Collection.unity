@@ -522,7 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd94b6c95ab61e4caa18b34c47f7747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creationButton: {fileID: 1148609966}
+  creationButton: {fileID: 587799452}
   galleryButton: {fileID: 0}
   quitButton: {fileID: 0}
   collectionScene: {fileID: 0}
@@ -888,6 +888,17 @@ MonoBehaviour:
 Transform:
   m_PrefabParentObject: {fileID: 434922, guid: b0a5d7b42c92dff429f919cfa54bd0a4, type: 2}
   m_PrefabInternal: {fileID: 1043188513}
+--- !u!114 &1043188517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1043188514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554e0782ebdd46749bd955770a17aed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1050043892
 Prefab:
   m_ObjectHideFlags: 0
@@ -1028,11 +1039,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   rotationTransform: 0
---- !u!1 &1148609966 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1260050882253672, guid: a6f2de463cb8c2845a1775f930974c04,
-    type: 2}
-  m_PrefabInternal: {fileID: 1514798956}
 --- !u!1 &1160919678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,6 +1162,26 @@ Prefab:
         type: 2}
       propertyPath: m_LocalPosition.x
       value: -0.08000183
+      objectReference: {fileID: 0}
+    - target: {fileID: 114241227390526454, guid: a6f2de463cb8c2845a1775f930974c04,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114274187566742570, guid: a6f2de463cb8c2845a1775f930974c04,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114911082984198484, guid: a6f2de463cb8c2845a1775f930974c04,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114399743403622408, guid: a6f2de463cb8c2845a1775f930974c04,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 65080498062400238, guid: a6f2de463cb8c2845a1775f930974c04, type: 2}
