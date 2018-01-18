@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class DisplayCollectedWords : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class DisplayCollectedWords : MonoBehaviour
         SaveWord savedWords = getCollectedScript.GetComponent<SaveWord>();
         print("Saved Words: " + savedWords.ReturnCollected());
         pouchWords = savedWords.ReturnCollected().Split(new char[] {});
+        pouchWords = pouchWords.Distinct().ToArray();
 
         foreach (string word in pouchWords)
         {

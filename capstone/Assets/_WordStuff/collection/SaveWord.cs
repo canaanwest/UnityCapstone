@@ -40,11 +40,16 @@ public class SaveWord : MonoBehaviour {
     {
         print("YOU HIT A WORD");
         print(selectedWord);
-        getWord = selectedWord.GetComponent<TextMesh>();
-        string word = getWord.text;
-        collectedWords += word + " ";
-        Destroy(getWord);
-        print(collectedWords);
+        if (selectedWord.name == "TextTemplate(Clone)")
+        {
+            getWord = selectedWord.GetComponent<TextMesh>();
+            string word = getWord.text;
+            Destroy(getWord);
+            collectedWords += word + " ";
+            
+            print(collectedWords);
+        }
+        
     }
 
     private void OnMouseDown()
@@ -66,14 +71,23 @@ public class SaveWord : MonoBehaviour {
 
         GameObject selectObject;
         selectObject = focusedObject;
-        yield return new WaitForSecondsRealtime(2);
+
+        yield return new WaitForSecondsRealtime(1);
 
         if (selectObject == focusedObject)
         {
-            EyeEventForCollectObjectWords(selectObject);
-            yield return new WaitForSecondsRealtime(2);
-            StartCoroutine("SaveWordEyeTrigger");
-        } else
+            yield return new WaitForSecondsRealtime(1);
+            if (selectObject == focusedObject)
+            {
+                EyeEventForCollectObjectWords(selectObject as GameObject);
+                yield return new WaitForSecondsRealtime(2);
+                StartCoroutine("SaveWordEyeTrigger");
+            } else
+            {
+                StartCoroutine("SaveWordEyeTrigger");
+            }
+        }
+        else
         {
             StartCoroutine("SaveWordEyeTrigger");
         }
