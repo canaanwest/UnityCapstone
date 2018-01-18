@@ -17,7 +17,11 @@ public class DisplayWords : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        focusedObj = TobiiAPI.GetFocusedObject();
+        if (TobiiAPI.GetFocusedObject())
+        {
+
+            focusedObj = TobiiAPI.GetFocusedObject();
+        }
         print("Focused object is " + focusedObj);
         //this function says if there's a mouseclick, emit an event
         //so that an object knows to display words;
@@ -122,13 +126,12 @@ public class DisplayWords : MonoBehaviour {
 
     public IEnumerator DisplayWordsForFocusedObject()
     {
-        while (focusedObj == null || focusedObj.name == "sack_010")
+        while (focusedObj == null || focusedObj.name == "sack_010" || focusedObj.name == "TextTemplate(Clone)")
         {
             yield return null;
             print("You haven't looked at a word associated object yet");
         }
-
-        print("YOU FOCUSED ON AN OBJECT GOOD BOY");
+        
         GameObject triggeredFocusedObject = focusedObj;
 
         yield return new WaitForSecondsRealtime(2);
@@ -137,11 +140,12 @@ public class DisplayWords : MonoBehaviour {
             print("TRYING TO CLICK ON " + focusedObj);
 
             EyeClickDisplayWords(triggeredFocusedObject);
+            yield return new WaitForSecondsRealtime(2);
             StartCoroutine("DisplayWordsForFocusedObject");
         }
         else
         {
-            StartCoroutine("DisplayWordsForFocusedObject");
+            DisplayWordsForFocusedObject();
         }
 
     }

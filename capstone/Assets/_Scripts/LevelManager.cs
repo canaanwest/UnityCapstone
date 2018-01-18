@@ -20,9 +20,6 @@ public class LevelManager : MonoBehaviour
 
     public void Update()
     {
-
-        focusedObject = TobiiAPI.GetFocusedObject();
-
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))
@@ -31,15 +28,10 @@ public class LevelManager : MonoBehaviour
             {
                 //&& hit.transform.gameObject.name == "sack_010"
                 print(hit.transform);
+                LoadLevel("Creation");
             }
         }
-
-        //focusedObject = null;
-        // EyeSelectLevel(focusedObject);   
-        // GetTimeElapsed(focusedObject);
     }
-
-
 
 
     public void LoadLevel(string name)
@@ -50,51 +42,5 @@ public class LevelManager : MonoBehaviour
     public void QuitRequest()
     {
         Application.Quit();
-    }
-
-    public void EyeSelectLevel(GameObject focusedObject)
-    {
-
-        if (focusedObject == creationButton)
-        {
-            print(creationButton);
-            focusedObject = null;
-            LoadLevel("Creation");
-        }
-        else if (focusedObject == galleryButton)
-        {
-            //LoadLevel("Gallery");
-        }
-        else if (focusedObject == quitButton)
-        {
-            // LoadLevel("Home");
-        }
-    }
-
-    public void GetTimeElapsed(GameObject focusedObject)
-    {
-        GameObject currentFocusedObj = TobiiAPI.GetFocusedObject();
-        if (focusedObject != null)
-        {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            // while (currentFocusedObj == focusedObject)
-            //{
-            long elapsedTime = stopwatch.ElapsedTicks;
-            for (int i = 0; i < 1000; i++)
-            {
-                print("i is" + i);
-                print("Elapsed time is " + elapsedTime);
-            }
-            currentFocusedObj = TobiiAPI.GetFocusedObject();
-            //LoadLevel("Gallery");
-            //}
-            stopwatch.Stop();
-
-
-            print("The user is focused on the " + focusedObject);
-
-        }
     }
 }

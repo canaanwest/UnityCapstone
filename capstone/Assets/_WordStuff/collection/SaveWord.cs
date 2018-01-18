@@ -1,17 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Tobii.Gaming;
 
 public class SaveWord : MonoBehaviour {
 
     static string collectedWords = "";
     TextMesh getWord;
+    GameObject focusedObject;
+
+    private void Start()
+    {
+        StartCoroutine("SaveWordEyeTrigger");
+    }
 
     private void Update()
     {
-
+        focusedObject = TobiiAPI.GetFocusedObject();
     }
-    void emitEventForCollectObjectWords()
+
+    void ClickEventForCollectObjectWords()
         //right now, this automatically gets all of the objects.
     {
         RaycastHit hit;
@@ -28,9 +36,20 @@ public class SaveWord : MonoBehaviour {
         }
     }
 
+    void EyeEventForCollectObjectWords(GameObject selectedWord)
+    {
+        print("YOU HIT A WORD");
+        // print(hit.transform.gameObject);
+        getWord = selectedWord.GetComponent<TextMesh>();
+        string word = getWord.text;
+        collectedWords += word + " ";
+        Destroy(getWord);
+        print(collectedWords);
+    }
+
     private void OnMouseDown()
     {
-        emitEventForCollectObjectWords();
+        ClickEventForCollectObjectWords();
     }
 
     public string ReturnCollected()
@@ -38,5 +57,26 @@ public class SaveWord : MonoBehaviour {
         return collectedWords;
     }
 
+    IEnumerator SaveWordEyeTrigger()
+    {
+        while (focusedObject == null || focusedObject.name != "TextTemplate(Clone)")
+        {
+            yield return null;
+        }
+
+        GameObject selectObject;
+        selectObject = focusedObject;
+        yield return new WaitForSecondsRealtime(2);
+
+        if (selectObject == focusedObject)
+        {
+            EyeEventForCollectObjectWords(selectObject);
+            yield return new WaitForSecondsRealtime(2);
+            StartCoroutine("SaveWordEyeTrigger");
+        } else
+        {
+            StartCoroutine("SaveWordEyeTrigger");
+        }
+    }
 
 }

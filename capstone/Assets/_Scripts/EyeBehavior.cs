@@ -14,7 +14,7 @@ public class EyeBehavior : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        displayScript = GameObject.Find("WordCatcher");
+        //displayScript = GameObject.Find("WordCatcher");
        // StartCoroutine("DisplayWordsForFocusedObject");
 
 
@@ -46,14 +46,16 @@ public class EyeBehavior : MonoBehaviour
             print("You haven't hit the creation button yet");
         }
 
+        GameObject currentFocusedObject = focusedObj;
 
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(2);
 
-        if (focusedObj != null && focusedObj.name == "sack_010")
+        if (focusedObj == currentFocusedObject)
         {
             print("You hit the creation button and I can execute a script now!!");
             LevelManager manageLevel = getLevelManagerScript.GetComponent<LevelManager>();
             manageLevel.LoadLevel("Creation");
+            yield return new WaitForSecondsRealtime(1);
             StopCoroutine("WaitAndLoad");
         }
         else
@@ -64,29 +66,7 @@ public class EyeBehavior : MonoBehaviour
         print("DONE!!");
     }
 
-    public IEnumerator DisplayWordsForFocusedObject()
-    {
-        while (focusedObj == null)
-        {
-            yield return null;
-            print("You haven't looked at a word associated object yet");
-        }
+    //the method below is not actually being executed in this script. There is some kind of mismatch in
+    //the way the objects are being passed aroudn that i'm not sure about;
 
-        print("YOU FOCUSED ON AN OBJECT GOOD BOY");
-        GameObject triggeredFocusedObject = focusedObj;
-
-        yield return new WaitForSecondsRealtime(2);
-        if (triggeredFocusedObject == focusedObj)
-        {
-            print("TRYING TO CLICK ON " + focusedObj);
-            DisplayWords displayWords = displayScript.GetComponent<DisplayWords>();
-
-            displayWords.EyeClickDisplayWords(triggeredFocusedObject as GameObject);
-            StartCoroutine("DisplayWordsForFocusedObject");
-        } else
-        {
-            StartCoroutine("DisplayWordsForFocusedObject");
-        }
-
-    }
 }
