@@ -19,12 +19,11 @@ public class DisplayWords : MonoBehaviour {
     void Update () {
         if (TobiiAPI.GetFocusedObject())
         {
-
             focusedObj = TobiiAPI.GetFocusedObject();
         }
+
         print("Focused object is " + focusedObj);
-        //this function says if there's a mouseclick, emit an event
-        //so that an object knows to display words;
+
         if (Input.GetMouseButtonUp(0))
         {
             emitEventForObjectToDisplayWords();
@@ -37,23 +36,25 @@ public class DisplayWords : MonoBehaviour {
         MouseClickDisplayWords();
     }
 
-    public void EyeClickDisplayWords(GameObject getWordsForThisObject)
+    public void EyeClickDisplayWords(GameObject targetObject)
+        //input is a game object.
     {
-        if ((currentObjectShowingWords == getWordsForThisObject))
+        if ((currentObjectShowingWords == targetObject))
+            
         {
-            ClearWords(getWordsForThisObject);
+            ClearWords(currentObjectShowingWords);
             currentObjectShowingWords = null;
         }
         else if ((currentObjectShowingWords != null))
         {
             ClearWords(currentObjectShowingWords);
-            currentObjectShowingWords = getWordsForThisObject;
-            LoadWords(getWordsForThisObject);
+            currentObjectShowingWords = targetObject;
+            LoadWords(currentObjectShowingWords);
         }
         else
         {
-            currentObjectShowingWords = getWordsForThisObject;
-            LoadWords(getWordsForThisObject);
+            currentObjectShowingWords = targetObject;
+            LoadWords(currentObjectShowingWords);
         }
     }
 
@@ -63,6 +64,9 @@ public class DisplayWords : MonoBehaviour {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, 100f) && hit.transform && hit.transform.Find("Words"))
         {
+            print("Hit is: " + hit);
+            print("Hit.transform is " + hit.transform);
+            print("Hit.transform.gameObject is " + hit.transform.gameObject);
             if ((currentObjectShowingWords == hit.transform.gameObject))
             {
                 ClearWords(currentObjectShowingWords);
@@ -133,19 +137,31 @@ public class DisplayWords : MonoBehaviour {
         }
         
         GameObject triggeredFocusedObject = focusedObj;
-
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSecondsRealtime(.5f);
         if (triggeredFocusedObject == focusedObj)
         {
+            yield return new WaitForSecondsRealtime(1f);
+            if (triggeredFocusedObject == focusedObj)
+            {
+                yield return new WaitForSecondsRealtime(1);
+                if (triggeredFocusedObject == focusedObj)
+                {
+                    EyeClickDisplayWords(triggeredFocusedObject as GameObject);
+                    yield return new WaitForSecondsRealtime(2);
+                    StartCoroutine("DisplayWordsForFocusedObject");
+                } else
+                {
+                    StartCoroutine("DisplayWordsForFocusedObject");
+                }
+            } else
+            {
+                StartCoroutine("DisplayWordsForFocusedObject");
+            }
             print("TRYING TO CLICK ON " + focusedObj);
-
-            EyeClickDisplayWords(triggeredFocusedObject);
-            yield return new WaitForSecondsRealtime(2);
-            StartCoroutine("DisplayWordsForFocusedObject");
         }
         else
         {
-            DisplayWordsForFocusedObject();
+            StartCoroutine("DisplayWordsForFocusedObject");
         }
 
     }
