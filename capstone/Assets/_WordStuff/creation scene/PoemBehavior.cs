@@ -22,13 +22,10 @@ public class PoemBehavior : MonoBehaviour {
 
     public void LoadWord(string word, int i)
     {
-        print("GOT INTO THE FUNCTIOn!");
         Transform gettingLoadObject = transform.Find("Poem");
-        print("gettingLoadObject is " + gettingLoadObject);
-
+     
         Text toFill = wordsPrefab.GetComponent<Text>();
-        print("gettingLoadObject is " + gettingLoadObject);
-
+     
         Transform position = gettingLoadObject.transform.GetChild(i);
         toFill.text = word;
         GameObject wordSpace = Instantiate(wordsPrefab, position.position, Quaternion.identity) as GameObject;
