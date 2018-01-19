@@ -27,13 +27,11 @@ public class DisplayCollectedWords : MonoBehaviour
 
         GameObject getCollectedScript = GameObject.Find("PouchWords");
         SaveWord savedWords = getCollectedScript.GetComponent<SaveWord>();
-        print("Saved Words: " + savedWords.ReturnCollected());
         pouchWords = savedWords.ReturnCollected().Split(new char[] {});
         pouchWords = pouchWords.Distinct().ToArray();
 
         foreach (string word in pouchWords)
         {
-            print("pouchwords: " + word);
             //attach word to position;
         }
 
@@ -49,8 +47,9 @@ public class DisplayCollectedWords : MonoBehaviour
     {
         //iterate through the words, adding them one-by-one to the positions in
         //the gameObject called "CanvasTL"
-        print("the this inside of DisplayCollectedWords is" + this.transform.Find("CanvasTL").Find("Words"));
+
         Transform gettingLoadObject = this.transform.Find("CanvasTL").Find("Words");
+        print("Getting load object from display collected words is: " + gettingLoadObject);
 
         int count = 0;
         foreach (Transform child in gettingLoadObject.transform)
@@ -71,12 +70,12 @@ public class DisplayCollectedWords : MonoBehaviour
             if (i < words.Length)
             {
                 Text toFill = wordPrefab.GetComponent<Text>();
-                print("word prefab's text is " + toFill.text);
+               
                 toFill.text = words[i];
                 GameObject wordSpace = Instantiate(wordPrefab, child.transform.position, Quaternion.identity) as GameObject;
                 wordSpace.transform.parent = child;
 
-                print("Word prefab is " + wordPrefab);
+              
                
             }
             i++;

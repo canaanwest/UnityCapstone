@@ -11,18 +11,25 @@ public class MoveToNotebook : MonoBehaviour {
     int i = 0;
     //GazePoint gazeLocation;
     Vector3 gazeLocation;
-    Object focusedObject;
     GraphicRaycaster graphicRaycaster;
-    
-    PointerEventData ped = new PointerEventData(null);
+    PointerEventData ped;
+    PoemBehavior poemBehavior;
+    GameObject getPoemBehaviorScript;
+
+
     // Use this for initialization
 
     void Start () {
-        //graphicRaycaster = GetComponent<GraphicRaycaster>();
-        //focusedObject = TobiiAPI.GetFocusedObject();
+        getPoemBehaviorScript = GameObject.Find("CanvasR");
+        print("the script you're trying to identify is " + getPoemBehaviorScript);
 
+        poemBehavior = getPoemBehaviorScript.GetComponent<PoemBehavior>();
+        print("^^^^^^^^^^^^^poem behavior is " + poemBehavior);
+
+        //focusedObject = TobiiAPI.GetFocusedObject();
         TobiiAPI.SubscribeGazePointData();
-        //StartCoroutine("GetGazePoint");
+        StartCoroutine("GetGazePoint");
+
     }
 
     // Update is called once per frame
@@ -40,15 +47,41 @@ public class MoveToNotebook : MonoBehaviour {
 
         //Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, new Vector2(0, 0));
+        //RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, new Vector2(0, 0));
 
-        if (hit.collider)
-        {
-            string newWord = hit.collider.transform.GetComponent<Text>().text;
 
-            LoadWord(newWord, i);
+        graphicRaycaster = GetComponent<GraphicRaycaster>();
+        ped = new PointerEventData(null);
+        ped.position = Input.mousePosition;
+
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        graphicRaycaster.Raycast(ped, results);
+
+      //  if (hit.collider)
+      if (results != null) 
+       {
+            //print("results length is " + results.Count);
+            poemBehavior = getPoemBehaviorScript.GetComponent<PoemBehavior>();
+            //string newWord = hit.collider.transform.GetComponent<Text>().text;
+            //print("Hit newWord is! " + newWord);
+            foreach (RaycastResult child in results)
+            {
+                string newWord = child.gameObject.GetComponent<Text>().text;
+                print("Result is " + newWord);
+
+                print("Function you're trying to call is " + poemBehavior);
+
+            poemBehavior.LoadWord(newWord, i);
+            print("Made it past load ");
             i++;
-        }
+            print("i is " + i);
+            }
+            
+            
+            //LoadWord(newWord, i);
+            
+       }
     }
 
     void EyeSelectWordForMovement()
@@ -63,26 +96,22 @@ public class MoveToNotebook : MonoBehaviour {
         {
             StartCoroutine("GetGazePoint");
             string newWord = hit.collider.transform.GetComponent<Text>().text;
-            //print(instanceID);
 
-            LoadWord(newWord, i);
+            poemBehavior.LoadWord(newWord, i);
             i++;
         }
     }
 
-    void LoadWord(string word, int i)
+    IEnumerable GetGazePoint()
     {
-        print("This.transform.parent: ");
-        print(this.transform.parent.parent.parent.parent);
-        Transform gettingLoadObject = this.transform.parent.parent.parent.parent.transform.Find("CanvasR").Find("Poem");
-        print("gettingLoadObject is " + gettingLoadObject);
 
-        Text toFill = wordsPrefab.GetComponent<Text>();
-        print("gettingLoadObject is " + gettingLoadObject);
+        while (gazeLocation == null)
+        {
+            yield return null;
+        }
 
-        Transform position = gettingLoadObject.transform.GetChild(i);
-        toFill.text = word;
-        GameObject wordSpace = Instantiate(wordsPrefab, position.position, Quaternion.identity) as GameObject;
-        wordSpace.transform.parent = position;
+
     }
+
+
 }

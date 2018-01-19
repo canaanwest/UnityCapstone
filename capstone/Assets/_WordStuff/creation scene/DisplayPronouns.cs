@@ -25,14 +25,14 @@ public class DisplayPronouns : MonoBehaviour {
 	void Start () {
         int randomOne = Random.Range(0, 7);
         int randomTwo;
-        print(randomOne + " is first random number");
+        
         // need a switch statement to decide what "random2" should be
         if (randomOne == 1) { randomTwo = 0; }
         else if (randomOne <= 2) { randomTwo = 1;  }
         else if (randomOne == 6) { randomTwo = 3;  }
         else { randomTwo = 2; }
 
-        print(randomTwo + " is the corresponding index for the verbs");
+        
 
 
         string[] pronoun = { pronouns[randomOne, 0], pronouns[randomOne, 1], pronouns[randomOne, 2],
@@ -59,7 +59,7 @@ public class DisplayPronouns : MonoBehaviour {
             GameObject wordSpace = Instantiate(wordPrefab, child.transform.position, Quaternion.identity) as GameObject;
             wordSpace.transform.parent = child;
 
-            print("Word prefab is " + wordPrefab);
+            
             i++;
         }
     
