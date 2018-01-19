@@ -49,7 +49,8 @@ public class DisplayCollectedWords : MonoBehaviour
     {
         //iterate through the words, adding them one-by-one to the positions in
         //the gameObject called "CanvasTL"
-        Transform gettingLoadObject = loadWordsHere.transform.Find("Words");
+        print("the this inside of DisplayCollectedWords is" + this.transform.Find("CanvasTL").Find("Words"));
+        Transform gettingLoadObject = this.transform.Find("CanvasTL").Find("Words");
 
         int count = 0;
         foreach (Transform child in gettingLoadObject.transform)
