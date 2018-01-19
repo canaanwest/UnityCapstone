@@ -8,8 +8,8 @@ using UnityEngine.EventSystems;
 public class MoveToNotebook : MonoBehaviour {
     //public GameObject loadWordsHere;
     public GameObject wordsPrefab;
-    int i = 0;
-    //GazePoint gazeLocation;
+    private int i;
+
     Vector3 gazeLocation;
     GraphicRaycaster graphicRaycaster;
     PointerEventData ped;
@@ -21,14 +21,12 @@ public class MoveToNotebook : MonoBehaviour {
 
     void Start () {
         getPoemBehaviorScript = GameObject.Find("CanvasR");
-        print("the script you're trying to identify is " + getPoemBehaviorScript);
-
         poemBehavior = getPoemBehaviorScript.GetComponent<PoemBehavior>();
-        print("^^^^^^^^^^^^^poem behavior is " + poemBehavior);
 
         //focusedObject = TobiiAPI.GetFocusedObject();
         TobiiAPI.SubscribeGazePointData();
         StartCoroutine("GetGazePoint");
+        i = 0;
 
     }
 
@@ -44,44 +42,37 @@ public class MoveToNotebook : MonoBehaviour {
 
     void SelectWordForMovement()
     {
-
-        //Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        //RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, new Vector2(0, 0));
-
-
         graphicRaycaster = GetComponent<GraphicRaycaster>();
         ped = new PointerEventData(null);
         ped.position = Input.mousePosition;
 
-
         List<RaycastResult> results = new List<RaycastResult>();
         graphicRaycaster.Raycast(ped, results);
-
-      //  if (hit.collider)
-      if (results != null) 
-       {
-            //print("results length is " + results.Count);
+        
+        if (results != null) 
+        {
             poemBehavior = getPoemBehaviorScript.GetComponent<PoemBehavior>();
-            //string newWord = hit.collider.transform.GetComponent<Text>().text;
-            //print("Hit newWord is! " + newWord);
+         
             foreach (RaycastResult child in results)
             {
                 string newWord = child.gameObject.GetComponent<Text>().text;
-                print("Result is " + newWord);
+                poemBehavior.LoadWord(newWord, i);
 
-                print("Function you're trying to call is " + poemBehavior);
+               
+            }
 
-            poemBehavior.LoadWord(newWord, i);
-            print("Made it past load ");
-            i++;
-            print("i is " + i);
+            if (i <= 14)
+            {
+                i++;
+            } else
+            {
+                i = 0;
             }
             
-            
+            print("i is " + i);
             //LoadWord(newWord, i);
-            
-       }
+
+        }
     }
 
     void EyeSelectWordForMovement()
