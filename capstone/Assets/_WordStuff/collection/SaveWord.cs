@@ -26,28 +26,22 @@ public class SaveWord : MonoBehaviour {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, 100f) && hit.transform && hit.transform.gameObject.name == "TextTemplate(Clone)")
         {
-            print("YOU HIT A WORD");
-            print(hit.transform.gameObject);
             getWord = GetComponent<TextMesh>();
             string word = getWord.text;
             collectedWords += word + " ";
             Destroy(getWord);
-            print(collectedWords);
         }
     }
 
     void EyeEventForCollectObjectWords(GameObject selectedWord)
     {
-        print("YOU HIT A WORD");
-        print(selectedWord);
+
         if (selectedWord.name == "TextTemplate(Clone)")
         {
             getWord = selectedWord.GetComponent<TextMesh>();
             string word = getWord.text;
             Destroy(getWord);
             collectedWords += word + " ";
-            
-            print(collectedWords);
         }
         
     }

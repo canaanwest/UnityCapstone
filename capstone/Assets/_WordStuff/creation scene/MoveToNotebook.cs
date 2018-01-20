@@ -14,7 +14,8 @@ public class MoveToNotebook : MonoBehaviour {
     PointerEventData ped;
     PoemBehavior poemBehavior;
     GameObject getPoemBehaviorScript;
-
+    List<RaycastResult> results;
+    
 
     // Use this for initialization
 
@@ -25,24 +26,26 @@ public class MoveToNotebook : MonoBehaviour {
         
 
         TobiiAPI.SubscribeGazePointData();
-        StartCoroutine("GetGazePoint");
+       
         print("Got past coroutine");
         i = 0;
-
+        graphicRaycaster = GetComponent<GraphicRaycaster>();
+        ped = new PointerEventData(null);
+        gazeLocation = TobiiAPI.GetGazePoint().Screen;
+        StartCoroutine("GetGazePoint");
     }
 
     // Update is called once per frame
     void Update() {
         gazeLocation = TobiiAPI.GetGazePoint().Screen;
-       // print(gazeLocation);/
+        results = new List<RaycastResult>();
+        ped.position = gazeLocation;
+        
 
         if (Input.GetMouseButtonDown(0))
         {
             SelectWordForMovement();
         }
-
-        graphicRaycaster = GetComponent<GraphicRaycaster>();
-        ped = new PointerEventData(null);
     }
 
     void SelectWordForMovement()
@@ -55,7 +58,6 @@ public class MoveToNotebook : MonoBehaviour {
         print("Gaze   " + gazeLocation);
         print("Mouse    " + Input.mousePosition);
 
-        List<RaycastResult> results = new List<RaycastResult>();
         graphicRaycaster.Raycast(ped, results);
 
         if (results != null)
@@ -66,8 +68,6 @@ public class MoveToNotebook : MonoBehaviour {
             {
                 string newWord = child.gameObject.GetComponent<Text>().text;
                 poemBehavior.LoadWord(newWord, i);
-
-
             }
 
             if (i <= 14)
@@ -102,70 +102,67 @@ public class MoveToNotebook : MonoBehaviour {
     //    }
     //}
 
-    //IEnumerator GetGazePoint()
-    //{
+    IEnumerator GetGazePoint()
+    {
+        List<RaycastResult> results = new List<RaycastResult>();
+        graphicRaycaster.Raycast(ped, results);
 
-    //    print("Got into the get gaze point function");
-    //    graphicRaycaster = GetComponent<GraphicRaycaster>();
-    //    List<RaycastResult> results = new List<RaycastResult>();
-    //    ped = new PointerEventData(null);
-    //    ped.position = gazeLocation;
-    //    graphicRaycaster.Raycast(ped, results);
+        while (results == null)
+        {
+            print("^^^^^^^^^NULL^^^^^^^^^^^^^^^^^^^");
+            yield return null;
+        }
 
-    //    while (results == null)
-    //    {
-    //        yield return null;
-    //    }
+        print("GOT PAST NULL");
+        List<RaycastResult> currentFocused = results;
+        //yield return new WaitForSecondsRealtime(1);
 
-    //    print("GOT PAST NULL");
-    //    List<RaycastResult> currentFocused = results;
-    //    //yield return new WaitForSecondsRealtime(1);
+        foreach (RaycastResult child in results)
+        {
+            print("^^^^^^^^^^^^^^^^^^^^^^^NOT NULL^^^^^^^^^^^^^^^^^^^^^");
+            print(child.gameObject.GetComponent<Text>().text);
+        }
 
-    //    foreach (RaycastResult child in results)
-    //    {
-    //        print(child.gameObject.GetComponent<Text>().text);
-    //    }
-
-    //    StartCoroutine("GetGazePoint");
+        //StartCoroutine("GetGazePoint");
 
 
-        //    yield return new WaitForSecondsRealtime(1);
+        //yield return new WaitForSecondsRealtime(1);
 
-        //    ped.position = gazeLocation;
-        //    List<RaycastResult> secondCurrentFocused = new List<RaycastResult>();
-        //    graphicRaycaster.Raycast(ped, secondCurrentFocused);
+        //ped.position = gazeLocation;
+        //List<RaycastResult> secondCurrentFocused = new List<RaycastResult>();
+        //graphicRaycaster.Raycast(ped, secondCurrentFocused);
 
-        //    print("WAITED ONE SECOND^^^^^^^^^^^^^^^^^^");
+        //print("WAITED ONE SECOND^^^^^^^^^^^^^^^^^^");
 
-        //    if (currentFocused == secondCurrentFocused)
+        //if (currentFocused == secondCurrentFocused)
+        //{
+        //    poemBehavior = getPoemBehaviorScript.GetComponent<PoemBehavior>();
+
+        //    foreach (RaycastResult child in results)
         //    {
-        //        poemBehavior = getPoemBehaviorScript.GetComponent<PoemBehavior>();
-
-        //        foreach (RaycastResult child in results)
-        //        {
-        //            string newWord = child.gameObject.GetComponent<Text>().text;
-        //            poemBehavior.LoadWord(newWord, i);
+        //        string newWord = child.gameObject.GetComponent<Text>().text;
+        //        poemBehavior.LoadWord(newWord, i);
 
 
-        //        }
+        //    }
 
-        //        if (i <= 14)
-        //        {
-        //            i++;
-        //        }
-        //        else
-        //        {
-        //            i = 0;
-        //        }
-
-        //        print("i is " + i);
-
+        //    if (i <= 14)
+        //    {
+        //        i++;
         //    }
         //    else
         //    {
-        //        StartCoroutine("GetGazePoint");
+        //        i = 0;
         //    }
-   // }
+
+        //    print("i is " + i);
+
+        //}
+        //else
+        //{
+        //    StartCoroutine("GetGazePoint");
+        //}
+    }
 
 }
             
@@ -176,3 +173,4 @@ public class MoveToNotebook : MonoBehaviour {
 
 
 
+//right now i think that there is a problem with where the raycast is placed with the coroutine. I don't know why, but the raycast seems to be working in the update. 
