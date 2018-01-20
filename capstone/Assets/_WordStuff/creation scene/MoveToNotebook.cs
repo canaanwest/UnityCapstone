@@ -102,31 +102,31 @@ public class MoveToNotebook : MonoBehaviour {
     //    }
     //}
 
-    IEnumerator GetGazePoint()
-    {
+    //IEnumerator GetGazePoint()
+    //{
 
-        print("Got into the get gaze point function");
-        graphicRaycaster = GetComponent<GraphicRaycaster>();
-        List<RaycastResult> results = new List<RaycastResult>();
-        ped = new PointerEventData(null);
-        ped.position = gazeLocation;
-        graphicRaycaster.Raycast(ped, results);
+    //    print("Got into the get gaze point function");
+    //    graphicRaycaster = GetComponent<GraphicRaycaster>();
+    //    List<RaycastResult> results = new List<RaycastResult>();
+    //    ped = new PointerEventData(null);
+    //    ped.position = gazeLocation;
+    //    graphicRaycaster.Raycast(ped, results);
 
-        while (results == null)
-        {
-            yield return null;
-        }
+    //    while (results == null)
+    //    {
+    //        yield return null;
+    //    }
 
-        print("GOT PAST NULL");
-        List<RaycastResult> currentFocused = results;
-        //yield return new WaitForSecondsRealtime(1);
+    //    print("GOT PAST NULL");
+    //    List<RaycastResult> currentFocused = results;
+    //    //yield return new WaitForSecondsRealtime(1);
 
-        foreach (RaycastResult child in results)
-        {
-            print(child.gameObject.GetComponent<Text>().text);
-        }
+    //    foreach (RaycastResult child in results)
+    //    {
+    //        print(child.gameObject.GetComponent<Text>().text);
+    //    }
 
-        StartCoroutine("GetGazePoint");
+    //    StartCoroutine("GetGazePoint");
 
 
         //    yield return new WaitForSecondsRealtime(1);
@@ -165,7 +165,7 @@ public class MoveToNotebook : MonoBehaviour {
         //    {
         //        StartCoroutine("GetGazePoint");
         //    }
-    }
+   // }
 
 }
             
