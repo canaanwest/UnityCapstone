@@ -17,6 +17,7 @@ public class DisplayWords : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        print(Camera.main.transform.eulerAngles);
         if (TobiiAPI.GetFocusedObject())
         {
             focusedObj = TobiiAPI.GetFocusedObject();
@@ -24,7 +25,7 @@ public class DisplayWords : MonoBehaviour {
 
         print("Focused object is " + focusedObj);
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonDown(0))
         {
             emitEventForObjectToDisplayWords();
         }
@@ -39,15 +40,16 @@ public class DisplayWords : MonoBehaviour {
     public void EyeClickDisplayWords(GameObject targetObject)
         //input is a game object.
     {
-        if ((currentObjectShowingWords == targetObject))
+        if (currentObjectShowingWords == targetObject)
             
         {
-            ClearWords(currentObjectShowingWords);
+            print("HIT IS! this object");
+            ClearWords();
             currentObjectShowingWords = null;
         }
-        else if ((currentObjectShowingWords != null))
+        else if (currentObjectShowingWords != null)
         {
-            ClearWords(currentObjectShowingWords);
+            ClearWords();
             currentObjectShowingWords = targetObject;
             LoadWords(currentObjectShowingWords);
         }
@@ -62,19 +64,18 @@ public class DisplayWords : MonoBehaviour {
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 100f) && hit.transform && hit.transform.Find("Words"))
+        //if (Physics.Raycast(ray, out hit, 100f) && hit.transform && hit.transform.Find("Words"))
+        if (Physics.Raycast(ray, out hit, 100f) && hit.transform && hit.transform.gameObject.tag == "Playable")
         {
-            print("Hit is: " + hit);
-            print("Hit.transform is " + hit.transform);
-            print("Hit.transform.gameObject is " + hit.transform.gameObject);
-            if ((currentObjectShowingWords == hit.transform.gameObject))
+
+            if (currentObjectShowingWords == hit.transform.gameObject)
             {
-                ClearWords(currentObjectShowingWords);
+                ClearWords();
                 currentObjectShowingWords = null;
             }
-            else if ((currentObjectShowingWords != null))
+            else if (currentObjectShowingWords != null)
             {
-                ClearWords(currentObjectShowingWords);
+                ClearWords();
                 currentObjectShowingWords = hit.transform.gameObject;
                 LoadWords(currentObjectShowingWords);
             }
@@ -93,26 +94,35 @@ public class DisplayWords : MonoBehaviour {
         //where is it getting the words? freaky.
     {
         GameObject currentObject = myObj;
-        if (currentObject.transform.Find("Words"))
+        if (currentObject.tag == "Playable")
         {
-            Transform wordsObject = currentObject.transform.Find("Words");
+            print("^^^^^^^^^^^^ &&&&& this should be camera: " + Camera.main.transform.Find("Words"));
+            Transform wordsObject = Camera.main.transform.Find("Words");
  
-           foreach (Transform child in wordsObject.transform)
+           foreach (Transform child in wordsObject)
             {
+                print("CHILD! " + child);
+                child.transform.eulerAngles = new Vector3(0, 0, 0);
                 GameObject wordSpace = Instantiate(wordPrefab, child.transform.position, Quaternion.identity) as GameObject;
-                wordSpace.transform.parent = child;
+                
+                print("^^^%^^^^^^^^" + child.transform.eulerAngles);
+                wordSpace.transform.parent = child.transform;
+                
+                wordSpace.transform.parent.eulerAngles = new Vector3(0, Mathf.Abs(Camera.main.transform.eulerAngles.y), 0);
+                print("Word angle is probably" + wordSpace.transform.eulerAngles);
+
             }
         }
     }
 
-    void ClearWords( GameObject myObj)
+    void ClearWords()
         //this function clears the word from a position;
 
     {
-        if (myObj.transform.Find("Words"))
+        if (Camera.main.transform.Find("Words"))
         {
-            GameObject currentObject = myObj;
-            Transform words = currentObject.transform.Find("Words");
+            //GameObject currentObject = myObj;
+            Transform words = Camera.main.transform.Find("Words");
 
             foreach (Transform child in words.transform)
             {
@@ -140,14 +150,16 @@ public class DisplayWords : MonoBehaviour {
         yield return new WaitForSecondsRealtime(.5f);
         if (triggeredFocusedObject == focusedObj)
         {
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime(1);
             if (triggeredFocusedObject == focusedObj)
             {
                 yield return new WaitForSecondsRealtime(1);
                 if (triggeredFocusedObject == focusedObj)
                 {
                     EyeClickDisplayWords(triggeredFocusedObject as GameObject);
-                    yield return new WaitForSecondsRealtime(2);
+                    yield return new WaitForSecondsRealtime(5);
+                    print("I EXECUTED AND WAITED TWO SECONDS");
+
                     StartCoroutine("DisplayWordsForFocusedObject");
                 } else
                 {

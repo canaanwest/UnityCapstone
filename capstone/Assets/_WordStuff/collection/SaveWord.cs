@@ -24,6 +24,12 @@ public class SaveWord : MonoBehaviour {
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 100f) && hit.transform)
+        {
+            print("HIT.TRANSFORM = " + hit.transform);
+        }
+       
         if (Physics.Raycast(ray, out hit, 100f) && hit.transform && hit.transform.gameObject.name == "TextTemplate(Clone)")
         {
             getWord = GetComponent<TextMesh>();
@@ -35,6 +41,7 @@ public class SaveWord : MonoBehaviour {
 
     void EyeEventForCollectObjectWords(GameObject selectedWord)
     {
+       
 
         if (selectedWord.name == "TextTemplate(Clone)")
         {

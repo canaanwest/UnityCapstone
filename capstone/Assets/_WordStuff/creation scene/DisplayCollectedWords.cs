@@ -65,6 +65,7 @@ public class DisplayCollectedWords : MonoBehaviour
 //        }
 
         int i = 0;
+        
         foreach (Transform child in gettingLoadObject.transform)
         {
             if (i < words.Length)
