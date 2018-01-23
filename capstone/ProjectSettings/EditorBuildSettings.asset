@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/_Scenes/Collection.unity
-    guid: 227c058ecbfa89a4090b3ed5d9b6bd17
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/_Scenes/Creation.unity
     guid: cc582ccb922a27747bdc128676b0a8b2
@@ -21,5 +21,8 @@ EditorBuildSettings:
     path: Assets/_Scenes/ParkScene1.unity
     guid: 28dda3b65d599f640af5e6ae486cdceb
   - enabled: 1
-    path: Assets/_Scenes/ParkScene2.unity
+    path: Assets/_Scenes/Collection.unity
     guid: b5fc2f56751d64349aa18476b88f60c3
+  - enabled: 1
+    path: Assets/_Scenes/Creation3D.unity
+    guid: b709f80df976cd744bf82a0f655c3e83

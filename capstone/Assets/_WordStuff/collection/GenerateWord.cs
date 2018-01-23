@@ -21,7 +21,8 @@ public class GenerateWord : MonoBehaviour {
     string[] lampPost = new string[] { "light", "tall", "metal", "old", "dark", "darkness", "creepy",
         "scary", "fire", "lit", "cast", "shadow", "nighttime", "night", "warmth" };
     string[] duck = new string[] { "quack", "waddle", "swim", "attack", "run", "bark", "white", "colorful",
-        "mallard", "farm", "bread", "crumbs", "dirty", "water" };
+        "mallard", "farm", "bread", "crumbs", "beak", "water", "bread", "goose", "geese", "swan", "swam", "fish", "pond",
+        "splash", "fishing", "paddle", "fly", "dunk", "dip", "dive"};
     string[] picnic = new string[] { "picnic", "basket", "fruit", "chips", "sandwich", "bread", "watermelon",
         "bananas", "sleep", "nap", "play", "toss", "family", "friends", "kids", "people", "folks", "blanket",
         "grass", "sunshine", "ball", "frisbee"};
@@ -30,9 +31,9 @@ public class GenerateWord : MonoBehaviour {
     string[] cloud = new string[] {"cloud", "float", "marshmallow", "painted", "puffy", "white", "grey",
         "rain", "shade", "sun", "block",  "shapes", "imagine", "imagination" } ;
     string[] bird = new string[] {"fly", "chirp", "sing", "colorful", "red", "blue", "black", "soar",
-        "high", "ground", "squawk", "bluejay", "robin", "hawk", "nest", "egg", "perch", "trees",};
+        "high", "ground", "squawk", "bluejay", "robin", "hawk", "nest", "egg", "perch", "trees", "wings", "feathers"};
     string[] sidewalk = new string[] {"ride", "run", "walk", "path", "stroll", "coast", "bike",
-        "skate", "chase", "skip", "walking path", "exercise", "ground", "hopscotch" };
+        "skate", "chase", "skip", "walking path", "exercise", "ground", "hopscotch", "swoop" };
     string[] rock = new string[] {"climb", "hide", "shadow", "old", "ancient", "shade",
         "protect", "crumble", "slide", "explore", "shape", "size", "huge", "tiny", "hard",
         "fun", "grey", "red", "mountains", "hills", "explorer", "tall"};

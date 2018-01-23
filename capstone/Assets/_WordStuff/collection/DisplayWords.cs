@@ -7,24 +7,23 @@ public class DisplayWords : MonoBehaviour {
     public GameObject wordPrefab;
     public GameObject currentObjectShowingWords;
     GameObject focusedObj;
+    public GameObject spotlight; 
 
 
 
     private void Start()
     {
+        spotlight.transform.position = new Vector3(-100, -100, -100);
         StartCoroutine("DisplayWordsForFocusedObject");
     }
 
     // Update is called once per frame
     void Update () {
-        print(Camera.main.transform.eulerAngles);
         if (TobiiAPI.GetFocusedObject())
         {
             focusedObj = TobiiAPI.GetFocusedObject();
         }
-
-        print("Focused object is " + focusedObj);
-
+        
         if (Input.GetMouseButtonDown(0))
         {
             emitEventForObjectToDisplayWords();
@@ -43,7 +42,6 @@ public class DisplayWords : MonoBehaviour {
         if (currentObjectShowingWords == targetObject)
             
         {
-            print("HIT IS! this object");
             ClearWords();
             currentObjectShowingWords = null;
         }
@@ -72,17 +70,29 @@ public class DisplayWords : MonoBehaviour {
             {
                 ClearWords();
                 currentObjectShowingWords = null;
+
+                spotlight.transform.position = new Vector3(-100, -100, -100);
             }
             else if (currentObjectShowingWords != null)
             {
                 ClearWords();
                 currentObjectShowingWords = hit.transform.gameObject;
                 LoadWords(currentObjectShowingWords);
+                //GameObject light = GameObject.Find("Light");
+                //light.transform.position = currentObjectShowingWords.transform.position;
+
+                
+                
+                spotlight.transform.position = currentObjectShowingWords.transform.position;
+                print("SPOTLIGHT IS " + spotlight);
+                print("position is " + spotlight.transform.position);
             }
             else
             {
                 currentObjectShowingWords = hit.transform.gameObject;
                 LoadWords(hit.transform.gameObject);
+               
+                spotlight.transform.position = currentObjectShowingWords.transform.position;
             }
 
         }
@@ -96,21 +106,15 @@ public class DisplayWords : MonoBehaviour {
         GameObject currentObject = myObj;
         if (currentObject.tag == "Playable")
         {
-            print("^^^^^^^^^^^^ &&&&& this should be camera: " + Camera.main.transform.Find("Words"));
             Transform wordsObject = Camera.main.transform.Find("Words");
  
            foreach (Transform child in wordsObject)
             {
-                print("CHILD! " + child);
                 child.transform.eulerAngles = new Vector3(0, 0, 0);
                 GameObject wordSpace = Instantiate(wordPrefab, child.transform.position, Quaternion.identity) as GameObject;
-                
-                print("^^^%^^^^^^^^" + child.transform.eulerAngles);
                 wordSpace.transform.parent = child.transform;
-                
                 wordSpace.transform.parent.eulerAngles = new Vector3(0, Mathf.Abs(Camera.main.transform.eulerAngles.y), 0);
-                print("Word angle is probably" + wordSpace.transform.eulerAngles);
-
+       
             }
         }
     }
@@ -143,7 +147,6 @@ public class DisplayWords : MonoBehaviour {
         while (focusedObj == null || focusedObj.name == "sack_010" || focusedObj.name == "TextTemplate(Clone)")
         {
             yield return null;
-            print("You haven't looked at a word associated object yet");
         }
         
         GameObject triggeredFocusedObject = focusedObj;
@@ -158,7 +161,6 @@ public class DisplayWords : MonoBehaviour {
                 {
                     EyeClickDisplayWords(triggeredFocusedObject as GameObject);
                     yield return new WaitForSecondsRealtime(5);
-                    print("I EXECUTED AND WAITED TWO SECONDS");
 
                     StartCoroutine("DisplayWordsForFocusedObject");
                 } else
@@ -169,7 +171,6 @@ public class DisplayWords : MonoBehaviour {
             {
                 StartCoroutine("DisplayWordsForFocusedObject");
             }
-            print("TRYING TO CLICK ON " + focusedObj);
         }
         else
         {
