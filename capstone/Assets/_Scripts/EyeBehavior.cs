@@ -14,14 +14,8 @@ public class EyeBehavior : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //displayScript = GameObject.Find("WordCatcher");
-       // StartCoroutine("DisplayWordsForFocusedObject");
-
-
         getLevelManagerScript = GameObject.Find("LevelManager");
-        StartCoroutine("WaitAndLoad");
-
-        
+        StartCoroutine("WaitAndLoad");   
     }
 
     // Update is called once per frame

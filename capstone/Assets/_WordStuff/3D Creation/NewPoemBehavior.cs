@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class NewPoemBehavior : MonoBehaviour
 {
     public GameObject wordsPrefab;
-
+    public static GameObject positionIndication;
 
     // Use this for initialization
     void Start()
     {
-
+        positionIndication = GameObject.Find("IndicatePosition");
     }
 
     // Update is called once per frame
@@ -26,14 +26,31 @@ public class NewPoemBehavior : MonoBehaviour
     public void LoadWord(string word, int i)
     {
         Transform gettingLoadObject = transform.Find("Poem");
-
         TextMesh toFill = wordsPrefab.GetComponent<TextMesh>();
-
-        Transform position = gettingLoadObject.transform.GetChild(i);
         toFill.text = word;
-        GameObject wordSpace = Instantiate(wordsPrefab, position.position, Quaternion.identity) as GameObject;
+        Transform nextPosition;
+        Transform position = gettingLoadObject.transform.GetChild(i);
+        if (i < 27)
+        {
+            nextPosition = gettingLoadObject.transform.GetChild(i + 1);
+        } else
+        {
+            nextPosition = gettingLoadObject.transform.GetChild(0);
+        }
 
+        DeleteOldWords(position.Find("poemTextTemp(Clone)"));
+
+        GameObject wordSpace = Instantiate(wordsPrefab, position.position, Quaternion.identity) as GameObject;
+        positionIndication.transform.position = new Vector3(nextPosition.position.x, nextPosition.position.y-2, nextPosition.position.z);
         wordSpace.transform.parent = position;
     }
 
+    void DeleteOldWords(Transform oldWord)
+    {
+        if (oldWord)
+        {
+            print("FOUND!");
+            Destroy(oldWord.gameObject);
+        }
+    }
 }

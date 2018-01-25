@@ -11,7 +11,7 @@ public class NewMoveToNotebook : MonoBehaviour
     private static int i;
     static GameObject getPoemBehaviorScript;
     static NewPoemBehavior newPoemBehavior;
-    public GameObject focusedObject; 
+    public GameObject focusedObject;
 
     // Use this for initialization
     void Start()
@@ -40,11 +40,12 @@ public class NewMoveToNotebook : MonoBehaviour
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 100f) && hit.transform && hit.transform.gameObject.name == "textCollectionTemp(Clone)")
+
+        if (Physics.Raycast(ray, out hit, 100f) && hit.transform && hit.transform.gameObject.tag == "Playable")
         {
-            
             string word = hit.transform.gameObject.GetComponent<TextMesh>().text;
-            if (i < 14)
+            print("WORD IS " + word);
+            if (i < 27)
             {
                 i++;
             }
@@ -53,17 +54,23 @@ public class NewMoveToNotebook : MonoBehaviour
                 i = 0;
             }
 
-
-            newPoemBehavior.LoadWord(word, i);
+           
+            if (hit.transform.gameObject.name == "SpaceBar")
+            {
+                newPoemBehavior.LoadWord(" ", i);
+            }
+            else
+            {
+                newPoemBehavior.LoadWord(word, i);
+            }
+            
         }
     }
-
-
 
     IEnumerator SaveWordEyeTrigger()
     {
         print("STARTED COROUTINE");
-        while (focusedObject == null || focusedObject.name != "textCollectionTemp(Clone)")
+        while (focusedObject == null || focusedObject.tag != "Playable")
         {
             yield return null;
         }
@@ -73,28 +80,32 @@ public class NewMoveToNotebook : MonoBehaviour
         GameObject selectObject;
         selectObject = focusedObject;
 
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(.5f);
         
         print("COMPARING OBJECTS!!");
-        if (selectObject == focusedObject)
+        if (selectObject == TobiiAPI.GetFocusedObject())
         {
-            yield return new WaitForSecondsRealtime(1);
-            if (selectObject == focusedObject)
+            yield return new WaitForSecondsRealtime(.5f);
+            if (selectObject == TobiiAPI.GetFocusedObject())
             {
-                if (i < 14)
+                yield return new WaitForSecondsRealtime(.5f);
+                if (selectObject == TobiiAPI.GetFocusedObject())
                 {
-                    i++;
-                }
-                else
+                    if (i < 28){ i++;}
+                    else{i = 0;}
+
+                    if (selectObject.name == "SpaceBar") { newPoemBehavior.LoadWord(" ", i);}
+                    else { newPoemBehavior.LoadWord(selectObject.GetComponent<TextMesh>().text, i);}
+
+                    focusedObject = null;
+                    yield return new WaitForSecondsRealtime(.5f);
+                    StartCoroutine("SaveWordEyeTrigger");
+
+                } else
                 {
-                    i = 0;
+                    StartCoroutine("SaveWordEyeTrigger");
                 }
-
-
-                newPoemBehavior.LoadWord(selectObject.GetComponent<TextMesh>().text, i);
-                focusedObject = null;
-                yield return new WaitForSecondsRealtime(2);
-                StartCoroutine("SaveWordEyeTrigger");
+                
             }
             else
             {

@@ -130,7 +130,7 @@ public class DisplayWords : MonoBehaviour {
 
             foreach (Transform child in words.transform)
             {
-                if (child.transform.Find("TextTemplate(Clone)").gameObject)
+                if (child.transform.Find("TextTemplate(Clone)"))
                 {
                     Destroy(child.transform.Find("TextTemplate(Clone)").gameObject);
                 }
